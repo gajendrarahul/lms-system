@@ -1,0 +1,95 @@
+{% extends 'base/master.html' %}
+{% block 'body' %}
+<h3 align="center"><a href="{% url 'add_user'%}"><div class="btn btn-primary"  style="border-radius:20px;">Add User</div></a>
+    <a href="#" data-toggle="modal" data-target="#add_announcement"><div class="btn btn-primary" style="border-radius:20px;">Add announcement</div></a>
+</h3>
+<h3></h3>
+<div class="container" style="margin-top:0px;">
+    <div class="col col-md-6">
+        <div class="box">
+            <h3 align="center">Teacher</h3>
+             <table class="table">
+               <th>Teacher Name</th>
+                 <th>Address</th>
+               <th>Action</th>
+               {% for j in teacher %}
+               <tr>
+                   <td>{{j.fullname}}</td>
+                   <td>{{j.address}}</td>
+                   <td><a href="{% url 'delete_teacher' j.id %}" style="font-weight:bold;"><i class="fa fa-trash"></i></a> |
+                       <a href="#" style="margin-left:5px;" data-toggle="modal" data-target="#edit_teacher"><i class="fa fa-edit"></i> </a> |
+                       <a href="#" style="margin-left:5px;" data-toggle="modal" data-target="#"><i class="fa fa-suspend"></i> </a>
+                   </td>
+               </tr>
+               {% endfor %}
+           </table>
+        </div>
+    </div>
+
+    <div class="col col-md-6">
+        <div class="box">
+            <h3 align="center">Student</h3>
+            <table class="table">
+                <th>Student Name</th>
+                <th>Address</th>
+                <th>Action</th>
+                {% for k in student%}
+                <tr>
+                   <td>{{k.fullname}}</td>
+                    <td>{{k.address}}</td>
+                    <td><a href="#" style="font-weight:bold;"><i class="fa fa-trash"></i></a> |
+                        <a href="#" style="margin-left:5px;" data-toggle="modal" data-target="#edit_student"><i class="fa fa-edit"></i> </a> |
+                        <a href="#" style="margin-left:5px;" data-toggle="modal" data-target="#"><i class="fa fa-suspend">suspend</i> </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+<!--teacher edit modal -->
+<div class="modal fade" id="edit_teacher" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <form method="post" action="{% url 'edit_teacher' %}">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="detail">Add Teacher</h4>
+      </div>
+      <div class="modal-body">
+          {% csrf_token %}
+          {{tedit}}
+           </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+        </form>
+    </div>
+
+  </div>
+</div>
+<!--add announcement modal -->
+<div class="modal fade" id="add_announcement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <form method="post" action="{% url 'add_announcement'%}">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="add-announcement1">Add Announcement</h4>
+      </div>
+      <div class="modal-body">
+          {% csrf_token %}
+          {{announcementform}}
+           </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+        </form>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base/master.html' %}
+
+{% block 'body' %}
+<h3>Tthis is teacher dashboard</h3>
+<div class="contaier">
+    <div class="col col-md-4">
+        <div class="box" style="height:50px;">
+            <h4>Announcement</h4>
+        </div>
+    </div>
+
+    <div class="col col-md-8">
+        <div class="box" style="height:50px;">
+            <h5>{{announcement.description}}</h5>
+        </div>
+    </div>
+</div>
+<br><br>
+
+{% endblock %}
